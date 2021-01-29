@@ -3,30 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TerminOrganisator2"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="TerminOrganisator" Height="450" Width="800" Loaded="Form_Loaded" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Icon="TO.png" Closing="Form_Closing">
     <Grid Margin="0,0,0,-69">
-        <Button x:Name="BtnTermine_Hinzufügen" Content="Termin Hinzufügen" HorizontalAlignment="Left" Height="50" Margin="407,288,0,0" VerticalAlignment="Top" Width="180" FontFamily="Arial" FontSize="14" Foreground="Black" Background="White" BorderBrush="Black" Click="BtnTermine_Hinzufügen_Click"/>
 
-        <ListView x:Name="Lv_Termine" HorizontalAlignment="Left" Height="273" Margin="10,10,0,0" VerticalAlignment="Top" Width="762" Foreground="Black" BorderBrush="Black" SelectionChanged="Lv_Termine_SelectionChanged">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Uhrzeit" Width="45" DisplayMemberBinding="{Binding Uhrzeit}"/>
-                    <GridViewColumn Header="Datum" Width="75" DisplayMemberBinding="{Binding Datum}"/>
-                    <GridViewColumn Header="Termin" Width="600" DisplayMemberBinding="{Binding Termin}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <DataGrid AutoGenerateColumns="False"  SelectedIndex="{Binding SelIndex}" x:Name="Lv_Termine" HorizontalAlignment="Left" Height="273" Margin="10,10,0,0" VerticalAlignment="Top" Width="762" 
+                  Foreground="Black" ItemsSource="{Binding Appointments}" BorderBrush="Black">
 
-        <Button x:Name="Btn_Termin_Löschen" Content="Termin Löschen" HorizontalAlignment="Left" Height="50" Margin="592,288,0,0" VerticalAlignment="Top" Width="180" FontFamily="Arial" FontSize="14" Foreground="Black" Background="White" BorderBrush="Black" Click="Btn_Termin_Löschen_Click"/>
-        <Button x:Name="Btn_Alle_Löschen" Content="Alle Löschen" HorizontalAlignment="Left" Height="50" Margin="592,343,0,0" VerticalAlignment="Top" Width="180" FontFamily="Arial" FontSize="14" Foreground="Black" Background="White" BorderBrush="Black" IsCancel="True" Click="Btn_Alle_Löschen_Click"/>
-        <TextBox x:Name="Txbx_Termine" HorizontalAlignment="Left" Height="105" Margin="10,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392" FontFamily="Arial" FontSize="18"/>
-        <DatePicker x:Name="Dapi_Datum" HorizontalAlignment="Left" Margin="407,343,0,0" VerticalAlignment="Top" Width="180" SelectedDateFormat="Short"/>
-        <ComboBox x:Name="Cmbx_Stunden" HorizontalAlignment="Left" Margin="482,372,0,0" VerticalAlignment="Top" Width="47" Background="White" BorderBrush="Black" Foreground="Black" IsReadOnly="True" OpacityMask="White"/>
-        <ComboBox x:Name="Cmbx_Minuten" HorizontalAlignment="Left" Margin="540,372,0,0" VerticalAlignment="Top" Width="47" Background="White" BorderBrush="Black" IsReadOnly="True"/>
-        <Label Content=":" HorizontalAlignment="Left" Margin="526,367,0,0" VerticalAlignment="Top" FontFamily="Arial" FontWeight="Bold" FontSize="18"/>
-        <Button x:Name="Btn_speichern" Content="Speichern" HorizontalAlignment="Left" Height="20" Margin="407,372,0,0" VerticalAlignment="Top" Width="69" FontFamily="Arial" FontSize="14" Foreground="Black" Background="White" BorderBrush="Black" Click="Btn_speichern_Click"/>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="*" Header="Datum">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <xctk:DateTimePicker DisplayDefaultValueOnEmptyText="True" DefaultValue="{x:Static System:DateTime.Now}" Value="{Binding Path=AppointmentDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="Dapi_Datum" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <!--<DatePicker SelectedDate="{Binding Path=AppointmentDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" />-->
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Termin" Width="*" Binding="{Binding AppointmentRemark}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button x:Name="Btn_Termin_Löschen" Content="Termin Löschen" HorizontalAlignment="Left" Height="27" Margin="535,288,0,0" VerticalAlignment="Top" Width="110" FontFamily="Arial" FontSize="14" Foreground="Black" Background="White" BorderBrush="Black" Click="Btn_Termin_Löschen_Click"/>
+        <Button x:Name="Btn_Alle_Löschen" Content="Alle Löschen" HorizontalAlignment="Left" Height="27" Margin="650,288,0,0" VerticalAlignment="Top" Width="122" FontFamily="Arial" FontSize="14" Foreground="Black" Background="White" BorderBrush="Black" IsCancel="True" Command="{Binding DeleteAllCommand}"/>
+        <Button x:Name="Btn_speichern" Content="Speichern" HorizontalAlignment="Left" Height="35" Margin="407,320,0,0" VerticalAlignment="Top" Width="123" FontFamily="Arial" FontSize="14" Foreground="Black" Background="White" BorderBrush="Black" Click="Btn_speichern_Click"/>
 
     </Grid>
 </Window>

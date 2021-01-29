@@ -39,9 +39,9 @@ namespace TerminOrganisator2
             if(Lv_Termine.SelectedIndex >= 0)
             {
 
-              string Uhrzeit = Lv_Termine.SelectedItem.ToString().Substring(Lv_Termine.SelectedItem.ToString().IndexOf("Uhrzeit") + 10, 5).ToString();
-              string Datum = Lv_Termine.SelectedItem.ToString().Substring(Lv_Termine.SelectedItem.ToString().IndexOf("Datum") + 8, 10).ToString();
-              string Termin = Lv_Termine.SelectedItem.ToString().Substring(10, Lv_Termine.SelectedItem.ToString().IndexOf("Uhrzeit") - 12).ToString();
+                string Uhrzeit = Lv_Termine.SelectedItem.ToString().Substring(Lv_Termine.SelectedItem.ToString().IndexOf("Uhrzeit") + 10, 5).ToString();
+                string Datum = Lv_Termine.SelectedItem.ToString().Substring(Lv_Termine.SelectedItem.ToString().IndexOf("Datum") + 8, 10).ToString();
+                string Termin = Lv_Termine.SelectedItem.ToString().Substring(10, Lv_Termine.SelectedItem.ToString().IndexOf("Uhrzeit") - 12).ToString();
 
                 Txbx_Termine.Text = Termin;
                 Cmbx_Stunden.SelectedItem = Uhrzeit.Substring(0, 2);
