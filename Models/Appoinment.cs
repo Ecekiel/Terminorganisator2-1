@@ -16,7 +16,7 @@ namespace TerminOrganisator2
         {
             return $"{this.AppointmentDate.ToString("yyyy/MM/dd HH:mm:ss")};{this.AppointmentRemark}";
         }
-
+ 
         public DateTime AppointmentDate
         {
             get

@@ -26,6 +26,9 @@ namespace TerminOrganisator2
     {
         private AppointmentManagerViewModel ViewModel { get; set; }
 
+        //POLYMORPHISMUS
+        //DYNAMISCHE BINDUNG
+
         public MainWindow()
         {
             this.ViewModel = new AppointmentManagerViewModel();
@@ -36,7 +39,8 @@ namespace TerminOrganisator2
         private void Form_Loaded(object sender, RoutedEventArgs e)
         {
             Program.Termine_aus_Datei_einlesen(Lv_Termine);
-            Btn_speichern.Visibility = Visibility.Hidden;
+            this.ViewModel.SampleEvent += ShowMessage;
+            //Btn_speichern.Visibility = Visibility.Hidden;
 
             //System.Windows.Threading.DispatcherTimer Timer = new System.Windows.Threading.DispatcherTimer();
             //Timer.Interval = TimeSpan.FromSeconds(1);
@@ -45,6 +49,16 @@ namespace TerminOrganisator2
 
         }
 
+        //TODO 
+        //Lager das Event in das ViewModel aus und überprüfe im ViewModel selbst
+        //jede Sekunde ob ein Termin ausgelaufen ist oder nicht. 
+        //Falls der Termin ausgelaufen ist löse ein Event aus.
+        //In der MainWindow.xaml.cs horchst du auf dieses Event und falls es ausgelöst wird dann zeigst du eine MessageBox an.
+
+        void ShowMessage(object sender, EventArgs e)
+        {
+            MessageBox.Show(e.ToString());
+        }
 
         //TODO rewrite so it works with changes made to model/viewmodel
         void Terminüberwachung(object sender, EventArgs e)
@@ -65,6 +79,7 @@ namespace TerminOrganisator2
 
                 if (Uhrzeit == Uhrzeit_jetzt && Datum == Datum_jetzt)
                 {
+                    
                     MessageBox.Show(Termin);
                     Lv_Termine.Items.Remove(Lv_Termine.Items[i]);
                 }

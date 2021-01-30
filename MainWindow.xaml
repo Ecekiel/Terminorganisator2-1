@@ -6,7 +6,7 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="TerminOrganisator" Height="450" Width="800" Loaded="Form_Loaded" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Icon="TO.png" Closing="Form_Closing">
+        Title="TerminOrganisator" Height="450" Width="800" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Icon="TO.png" Closing="Form_Closing">
     <Grid Margin="0,0,0,-69">
 
         <DataGrid AutoGenerateColumns="False"  SelectedIndex="{Binding SelIndex}" x:Name="Lv_Termine" HorizontalAlignment="Left" Height="273" Margin="10,10,0,0" VerticalAlignment="Top" Width="762" 
@@ -24,10 +24,10 @@
                 <DataGridTextColumn Header="Termin" Width="*" Binding="{Binding AppointmentRemark}"/>
             </DataGrid.Columns>
         </DataGrid>
+        
 
         <Button x:Name="Btn_Termin_Löschen" Content="Termin Löschen" HorizontalAlignment="Left" Height="27" Margin="535,288,0,0" VerticalAlignment="Top" Width="110" FontFamily="Arial" FontSize="14" Foreground="Black" Background="White" BorderBrush="Black" Click="Btn_Termin_Löschen_Click"/>
         <Button x:Name="Btn_Alle_Löschen" Content="Alle Löschen" HorizontalAlignment="Left" Height="27" Margin="650,288,0,0" VerticalAlignment="Top" Width="122" FontFamily="Arial" FontSize="14" Foreground="Black" Background="White" BorderBrush="Black" IsCancel="True" Command="{Binding DeleteAllCommand}"/>
-        <Button x:Name="Btn_speichern" Content="Speichern" HorizontalAlignment="Left" Height="35" Margin="407,320,0,0" VerticalAlignment="Top" Width="123" FontFamily="Arial" FontSize="14" Foreground="Black" Background="White" BorderBrush="Black" Click="Btn_speichern_Click"/>
 
     </Grid>
 </Window>
